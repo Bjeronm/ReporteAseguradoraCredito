@@ -93,3 +93,4 @@ C:\Users\programador08\Documents\Bryan\ReporteAseguradoraCredito\ReporteAsegurad
 C:\Users\programador08\Documents\Bryan\ReporteAseguradoraCredito\ReporteAseguradoraCredito\obj\Debug\ReporteAseguradoraCredito.pdb
 C:\Users\programador08\Documents\Bryan\ReporteAseguradoraCredito\ReporteAseguradoraCredito\obj\Debug\ReporteAseguradoraCredito.SegurosWFM.resources
 C:\Users\programador08\Documents\Bryan\ReporteAseguradoraCredito\ReporteAseguradoraCredito\obj\Debug\ReporteAseguradoraCredito.Controls.RJTextBox.resources
+C:\Users\programador08\Documents\Bryan\ReporteAseguradoraCredito\ReporteAseguradoraCredito\obj\Debug\ReporteAseguradoraCredito.CreditosWFM.resources

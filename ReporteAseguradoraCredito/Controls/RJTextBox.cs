@@ -14,7 +14,6 @@ namespace ReporteAseguradoraCredito.Controls
     [DefaultEvent("_TextChanged")]
     public partial class RJTextBox : UserControl
     {
-
         #region -> Fields
         //Fields
         private Color borderColor = Color.MediumSlateBlue;
@@ -34,9 +33,10 @@ namespace ReporteAseguradoraCredito.Controls
 
         #endregion
 
-
+        //-> Constructor
         public RJTextBox()
         {
+            //Created by designer
             InitializeComponent();
         }
 

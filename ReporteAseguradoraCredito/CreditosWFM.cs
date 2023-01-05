@@ -16,5 +16,15 @@ namespace ReporteAseguradoraCredito
         {
             InitializeComponent();
         }
+
+        private void bunifuTextBox8_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelBodyCreditos_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

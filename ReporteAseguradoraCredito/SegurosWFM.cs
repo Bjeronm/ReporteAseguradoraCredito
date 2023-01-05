@@ -26,5 +26,25 @@ namespace ReporteAseguradoraCredito
         {
 
         }
+
+        private void bunifuTextBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bunifuTextBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
