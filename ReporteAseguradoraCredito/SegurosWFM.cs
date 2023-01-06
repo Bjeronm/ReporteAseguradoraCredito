@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,34 +19,18 @@ namespace ReporteAseguradoraCredito
             InitializeComponent();
         }
 
-        private void panelSegurosBody_Paint(object sender, PaintEventArgs e)
+        private void obtenerDatos()
         {
+            string conn = ConfigurationManager.ConnectionStrings["reportes"].ConnectionString;
+            SqlConnection sqlCon = new SqlConnection(conn);
 
-        }
+            if (sqlCon.State == ConnectionState.Closed)
+                sqlCon.Open();
 
-        private void bunifuTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bunifuTextBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bunifuTextBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            SqlCommand datareader = new SqlCommand("", sqlCon);
+            SqlDataReader data = datareader.ExecuteReader();
+            dataGridDetalleSeguro.DataSource = data;
+            
         }
     }
 }
