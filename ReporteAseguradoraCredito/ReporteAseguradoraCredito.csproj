@@ -45,9 +45,6 @@
     <Reference Include="Bunifu.UI.WinForms.1.5.3, Version=1.5.3.0, Culture=neutral, PublicKeyToken=e8e24ccd28363fe9, processorArchitecture=MSIL">
       <HintPath>..\packages\Bunifu.UI.WinForms.1.5.3.1.0.0\lib\net40\Bunifu.UI.WinForms.1.5.3.dll</HintPath>
     </Reference>
-    <Reference Include="ComponentFactory.Krypton.Toolkit">
-      <HintPath>..\..\..\..\Downloads\Krypton-master\Bin\ComponentFactory.Krypton.Toolkit.dll</HintPath>
-    </Reference>
     <Reference Include="Costura, Version=3.3.3.0, Culture=neutral, PublicKeyToken=9919ef960d84173d, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.3.3.3\lib\net40\Costura.dll</HintPath>
     </Reference>
@@ -211,6 +208,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CH_IntegracionDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CH_IntegracionDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Controls\RJTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -259,6 +261,17 @@
     <EmbeddedResource Include="SegurosWFM.resx">
       <DependentUpon>SegurosWFM.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="CH_IntegracionDataSet.xsc">
+      <DependentUpon>CH_IntegracionDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CH_IntegracionDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CH_IntegracionDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CH_IntegracionDataSet.xss">
+      <DependentUpon>CH_IntegracionDataSet.xsd</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -272,6 +285,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Datos\Datos.csproj">
+      <Project>{f24adc65-a064-4df2-a228-dce99a0095f2}</Project>
+      <Name>Datos</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.4.0.2\build\Fody.targets" Condition="Exists('..\packages\Fody.4.0.2\build\Fody.targets')" />
