@@ -9,24 +9,26 @@ using System.Threading.Tasks;
 
 namespace Datos
 {
-    internal class Seguros
+    public class Seguros
     {
-        public DataTable searchSeguros()
+        public DataSet searchSeguros()
         {
             string conn = ConfigurationManager.ConnectionStrings["ReporteAseguradoraCredito.Properties.Settings.Reportes"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(conn))
             {
-                using (SqlCommand command = new SqlCommand("select top 50 * from CAC_HISTORIAL_DOCUMENTO with(nolock) where HISDOCAfectaInventario = 0", connection))
+                using (SqlCommand command = new SqlCommand("USP_CAC_GET_VENTAS_ASEGURADORAS", connection))
                 {
-                    command.CommandType = CommandType.Text;
+                    command.CommandType = CommandType.StoredProcedure;
                     DataTable result = new DataTable();
+                    DataSet dataSet = new DataSet();
 
                     try
                     {
                         connection.Open();
                         SqlDataAdapter DA = new SqlDataAdapter();
-                        DA.Fill(result);
-                        return result;
+                        dataSet.Tables.Add(result);
+                        DA.Fill(dataSet);
+                        return dataSet;
                     }
                     catch
                     {
