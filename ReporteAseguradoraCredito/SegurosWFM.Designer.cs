@@ -87,11 +87,11 @@
             this.grbConsololidadoAseguradora = new System.Windows.Forms.GroupBox();
             this.dataGridConsolidadoSeguro = new System.Windows.Forms.DataGridView();
             this.groupBoxDetalleSeguros = new System.Windows.Forms.GroupBox();
-            this.lblTotalSeguros = new System.Windows.Forms.Label();
-            this.dataGridDetalleSeguro = new System.Windows.Forms.DataGridView();
-            this.lblTotalAseg = new System.Windows.Forms.Label();
             this.lblTotalClie = new System.Windows.Forms.Label();
             this.lblTotalCliente = new System.Windows.Forms.Label();
+            this.lblTotalAseg = new System.Windows.Forms.Label();
+            this.lblTotalSeguros = new System.Windows.Forms.Label();
+            this.dataGridDetalleSeguro = new System.Windows.Forms.DataGridView();
             this.segurosPanelHeader.SuspendLayout();
             this.panelBodySeguros.SuspendLayout();
             this.grbConsolidadoClienteAseguradora.SuspendLayout();
@@ -986,50 +986,6 @@
             this.groupBoxDetalleSeguros.TabStop = false;
             this.groupBoxDetalleSeguros.Text = "Detalle";
             // 
-            // lblTotalSeguros
-            // 
-            this.lblTotalSeguros.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTotalSeguros.AutoSize = true;
-            this.lblTotalSeguros.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalSeguros.Location = new System.Drawing.Point(48, 544);
-            this.lblTotalSeguros.Name = "lblTotalSeguros";
-            this.lblTotalSeguros.Size = new System.Drawing.Size(175, 28);
-            this.lblTotalSeguros.TabIndex = 1;
-            this.lblTotalSeguros.Text = "Total Aseguradora:";
-            // 
-            // dataGridDetalleSeguro
-            // 
-            this.dataGridDetalleSeguro.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridDetalleSeguro.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridDetalleSeguro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridDetalleSeguro.DefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridDetalleSeguro.Location = new System.Drawing.Point(16, 30);
-            this.dataGridDetalleSeguro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridDetalleSeguro.Name = "dataGridDetalleSeguro";
-            this.dataGridDetalleSeguro.RowTemplate.Height = 24;
-            this.dataGridDetalleSeguro.Size = new System.Drawing.Size(774, 501);
-            this.dataGridDetalleSeguro.TabIndex = 0;
-            // 
-            // lblTotalAseg
-            // 
-            this.lblTotalAseg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTotalAseg.AutoSize = true;
-            this.lblTotalAseg.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalAseg.Location = new System.Drawing.Point(280, 544);
-            this.lblTotalAseg.Name = "lblTotalAseg";
-            this.lblTotalAseg.Size = new System.Drawing.Size(36, 28);
-            this.lblTotalAseg.TabIndex = 2;
-            this.lblTotalAseg.Text = "---";
-            // 
             // lblTotalClie
             // 
             this.lblTotalClie.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -1051,6 +1007,51 @@
             this.lblTotalCliente.Size = new System.Drawing.Size(123, 28);
             this.lblTotalCliente.TabIndex = 3;
             this.lblTotalCliente.Text = "Total Cliente:";
+            // 
+            // lblTotalAseg
+            // 
+            this.lblTotalAseg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTotalAseg.AutoSize = true;
+            this.lblTotalAseg.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalAseg.Location = new System.Drawing.Point(280, 544);
+            this.lblTotalAseg.Name = "lblTotalAseg";
+            this.lblTotalAseg.Size = new System.Drawing.Size(36, 28);
+            this.lblTotalAseg.TabIndex = 2;
+            this.lblTotalAseg.Text = "---";
+            // 
+            // lblTotalSeguros
+            // 
+            this.lblTotalSeguros.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblTotalSeguros.AutoSize = true;
+            this.lblTotalSeguros.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalSeguros.Location = new System.Drawing.Point(48, 544);
+            this.lblTotalSeguros.Name = "lblTotalSeguros";
+            this.lblTotalSeguros.Size = new System.Drawing.Size(175, 28);
+            this.lblTotalSeguros.TabIndex = 1;
+            this.lblTotalSeguros.Text = "Total Aseguradora:";
+            // 
+            // dataGridDetalleSeguro
+            // 
+            this.dataGridDetalleSeguro.AllowUserToAddRows = false;
+            this.dataGridDetalleSeguro.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridDetalleSeguro.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridDetalleSeguro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridDetalleSeguro.DefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridDetalleSeguro.Location = new System.Drawing.Point(16, 30);
+            this.dataGridDetalleSeguro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridDetalleSeguro.Name = "dataGridDetalleSeguro";
+            this.dataGridDetalleSeguro.RowTemplate.Height = 24;
+            this.dataGridDetalleSeguro.Size = new System.Drawing.Size(774, 501);
+            this.dataGridDetalleSeguro.TabIndex = 0;
             // 
             // SegurosWFM
             // 

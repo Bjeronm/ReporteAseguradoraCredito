@@ -20,6 +20,7 @@ namespace ReporteAseguradoraCredito
         {
             InitializeComponent();
         }
+        
 
         private void obtenerDatos()
         {
@@ -42,20 +43,48 @@ namespace ReporteAseguradoraCredito
                         DA.SelectCommand.Parameters.AddWithValue("@FECHA_FIN", fechaFinSeguros.Value.Date.ToString("yyyyMMdd"));
                         DA.Fill(dataSet);
                         dataSet.Tables.Add(result);
+                        //var totalFacAnul = dataSet.Tables[0];
+                        //var serie = totalFacAnul.Where(row => row.Equals("[Serie Aseguradora]") = txtSerieSeguro.Text);
+                        //var resultSum = totalFacAnul.Compute("Sum([Total Aseguradora])", "Estado = 0 and [Tipo Documento] = 2");
+                        //lblTotalAseg.Text = resultSum.ToString();
                         dataGridDetalleSeguro.DataSource = dataSet.Tables[0];
-                        dataGridConsolidadoSeguro.DataSource = dataSet.Tables[2];
+                        int c = dataGridDetalleSeguro.Rows.Count;
+                        for (int i = 0; i < c; i++)
+                        {
+                            if (dataGridDetalleSeguro.Rows[i].Cells[11].Value.ToString() == "4" || dataGridDetalleSeguro.Rows[i].Cells[26].Value.ToString() == "0")
+                            {
+                                dataGridDetalleSeguro.Rows[i].DefaultCellStyle.ForeColor = Color.White;
+                                dataGridDetalleSeguro.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(236, 72, 36);
+                            }
+                            /*else if (dataGridDetalleSeguro.Rows[i].Cells[26].Value.ToString() == "0")
+                            {
+                                dataGridDetalleSeguro.Rows[i].DefaultCellStyle.ForeColor = Color.FromArgb(255, 255, 255);
+                                dataGridDetalleSeguro.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(149, 145, 144);
+                            }*/
+                            /*else if(dataGridDetalleSeguro.Rows[i].Cells[26].Value.ToString() == "1")
+                            {
+                                dataGridDetalleSeguro.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(48, 189, 34);
+                            }*/
+
+                        }
+
+                        var consolidadoAseguradora = dataSet.Tables[2];
+                        dataGridConsolidadoSeguro.DataSource = consolidadoAseguradora;
+                        var sumaConsolidadoAseguradora = consolidadoAseguradora.Compute("Sum(Total)", "");
+                        consolidadoAseguradora.Rows.Add(new object[] {0, "TOTAL", sumaConsolidadoAseguradora});
+
                         var totalAseguradora = dataSet.Tables[1];
                         lblTotalAseg.Text = totalAseguradora.Rows[0]["Total"].ToString();
+                        
                         //consolidado cliente
-                        dataGridConsolidadoCliente.DataSource = dataSet.Tables[4];
                         var totalCliente = dataSet.Tables[3];
                         lblTotalClie.Text = totalCliente.Rows[0]["Total"].ToString();
-
-                        var tabla4 = dataSet.Tables[4];
-                        var suma = tabla4.Compute("Sum(Total)", "");
-                        dataSet.Tables[4].Rows.Add(new object[] {0, "Total",suma});
-
                         
+                        var ConsolidadoCliente = dataSet.Tables[4];
+                        dataGridConsolidadoCliente.DataSource = ConsolidadoCliente;
+                        var sumaConsolidadoCliente = ConsolidadoCliente.Compute("Sum(Total)", "");
+                        ConsolidadoCliente.Rows.Add(new object[] {0, "TOTAL", sumaConsolidadoCliente });
+                                               
                     }
                     catch(Exception e)
                     {
@@ -69,5 +98,59 @@ namespace ReporteAseguradoraCredito
         {
             obtenerDatos();
         }
+
+       /* private void txtSerieSeguro_TextChanged(object sender, EventArgs e)
+        {
+            if(txtSerieSeguro.Text != "")
+            {
+                dataGridDetalleSeguro.CurrentCell = null;
+                foreach(DataGridViewRow c in dataGridDetalleSeguro.Rows)
+                {
+                    c.Visible = false;
+                }
+                foreach (DataGridViewRow c in dataGridDetalleSeguro.Rows)
+                {
+                    foreach(DataGridViewCell cel in c.Cells)
+                    {
+                        if ((cel.Value.ToString().ToUpper()).IndexOf(txtSerieSeguro.Text.ToUpper()) == 0)
+                        {
+                            c.Visible = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                obtenerDatos();
+            }
+        }
+
+        private void txtReferenciaSeguro_TextChanged(object sender, EventArgs e)
+        {
+            if (txtReferenciaSeguro.Text != "")
+            {
+                dataGridDetalleSeguro.CurrentCell = null;
+                foreach (DataGridViewRow c in dataGridDetalleSeguro.Rows)
+                {
+                    c.Visible = false;
+                }
+                foreach (DataGridViewRow c in dataGridDetalleSeguro.Rows)
+                {
+                    foreach (DataGridViewCell cel in c.Cells)
+                    {
+                        if ((cel.Value.ToString().ToUpper()).IndexOf(txtSerieSeguro.Text.ToUpper()) == 0)
+                        {
+                            c.Visible = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                obtenerDatos();
+            }
+        }*/
     }
 }
