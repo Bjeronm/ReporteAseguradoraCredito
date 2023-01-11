@@ -61,12 +61,7 @@
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties30 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties31 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties32 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.segurosPanelHeader = new Bunifu.UI.WinForms.BunifuGradientPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.lblFechaFin = new Bunifu.UI.WinForms.BunifuLabel();
             this.lblFechaIni = new Bunifu.UI.WinForms.BunifuLabel();
             this.fechaFinSeguros = new Bunifu.UI.WinForms.BunifuDatePicker();
@@ -108,8 +103,6 @@
             this.segurosPanelHeader.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("segurosPanelHeader.BackgroundImage")));
             this.segurosPanelHeader.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.segurosPanelHeader.BorderRadius = 1;
-            this.segurosPanelHeader.Controls.Add(this.label2);
-            this.segurosPanelHeader.Controls.Add(this.label1);
             this.segurosPanelHeader.Controls.Add(this.lblFechaFin);
             this.segurosPanelHeader.Controls.Add(this.lblFechaIni);
             this.segurosPanelHeader.Controls.Add(this.fechaFinSeguros);
@@ -135,20 +128,6 @@
             this.segurosPanelHeader.Quality = 10;
             this.segurosPanelHeader.Size = new System.Drawing.Size(1448, 177);
             this.segurosPanelHeader.TabIndex = 0;
-            // 
-            // label2
-            // 
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 23);
-            this.label2.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 23);
-            this.label1.TabIndex = 1;
             // 
             // lblFechaFin
             // 
@@ -851,6 +830,8 @@
             this.txtSerieSeguro.TextPlaceholder = "Serie";
             this.txtSerieSeguro.UseSystemPasswordChar = false;
             this.txtSerieSeguro.WordWrap = true;
+            this.txtSerieSeguro.TextChanged += new System.EventHandler(this.txtSerieSeguro_TextChanged);
+            this.txtSerieSeguro.Enter += new System.EventHandler(this.txtSerieSeguro_Enter);
             // 
             // fechaIniSeguro
             // 
@@ -915,14 +896,6 @@
             // 
             this.dataGridConsolidadoCliente.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridConsolidadoCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridConsolidadoCliente.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridConsolidadoCliente.Location = new System.Drawing.Point(5, 30);
             this.dataGridConsolidadoCliente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridConsolidadoCliente.Name = "dataGridConsolidadoCliente";
@@ -950,14 +923,6 @@
             this.dataGridConsolidadoSeguro.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridConsolidadoSeguro.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridConsolidadoSeguro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridConsolidadoSeguro.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridConsolidadoSeguro.Location = new System.Drawing.Point(5, 30);
             this.dataGridConsolidadoSeguro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridConsolidadoSeguro.Name = "dataGridConsolidadoSeguro";
@@ -1038,14 +1003,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridDetalleSeguro.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridDetalleSeguro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridDetalleSeguro.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridDetalleSeguro.Location = new System.Drawing.Point(16, 30);
             this.dataGridDetalleSeguro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridDetalleSeguro.Name = "dataGridDetalleSeguro";
@@ -1103,8 +1060,6 @@
         private Bunifu.UI.WinForms.BunifuLabel lblFechaFin;
         private Bunifu.UI.WinForms.BunifuLabel lblFechaIni;
         private Bunifu.UI.WinForms.BunifuDatePicker fechaFinSeguros;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblTotalAseg;
         private System.Windows.Forms.Label lblTotalClie;
         private System.Windows.Forms.Label lblTotalCliente;

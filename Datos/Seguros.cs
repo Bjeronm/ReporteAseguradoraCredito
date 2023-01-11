@@ -6,12 +6,13 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Datos
 {
     public class Seguros
     {
-        public DataSet searchSeguros()
+       /* public DataSet searchSeguros()
         {
             string conn = ConfigurationManager.ConnectionStrings["ReporteAseguradoraCredito.Properties.Settings.Reportes"].ConnectionString;
             using (SqlConnection connection = new SqlConnection(conn))
@@ -32,6 +33,36 @@ namespace Datos
                     }
                     catch
                     {
+                        return null;
+                    }
+                }
+            }
+        }*/
+
+        public DataSet getSeguros(string SPSeguros, string fechaIni,string fechaFin)
+        {
+            string conn = ConfigurationManager.ConnectionStrings["ReporteAseguradoraCredito.Properties.Settings.Reportes"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(conn))
+            {
+                using (SqlCommand command = new SqlCommand(SPSeguros, connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    DataTable result = new DataTable();
+                    DataSet dataSet = new DataSet();
+
+                    try
+                    {
+                        connection.Open();
+                        SqlDataAdapter DA = new SqlDataAdapter(command);
+                        DA.SelectCommand.Parameters.AddWithValue("@FECHA_INI", fechaIni);
+                        DA.SelectCommand.Parameters.AddWithValue("@FECHA_FIN", fechaFin);
+                        DA.Fill(dataSet);
+                        dataSet.Tables.Add(result);
+                        return dataSet;
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message, "Error Message");
                         return null;
                     }
                 }
