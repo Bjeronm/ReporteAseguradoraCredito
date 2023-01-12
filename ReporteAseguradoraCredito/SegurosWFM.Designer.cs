@@ -61,11 +61,11 @@
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties30 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties31 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties32 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.segurosPanelHeader = new Bunifu.UI.WinForms.BunifuGradientPanel();
             this.lblFechaFin = new Bunifu.UI.WinForms.BunifuLabel();
             this.lblFechaIni = new Bunifu.UI.WinForms.BunifuLabel();
             this.fechaFinSeguros = new Bunifu.UI.WinForms.BunifuDatePicker();
-            this.btnPrueba = new System.Windows.Forms.Button();
             this.bunifuLabel1 = new Bunifu.UI.WinForms.BunifuLabel();
             this.txtReferenciaSeguro = new Bunifu.UI.WinForms.BunifuTextBox();
             this.txtNoFelSeguros = new Bunifu.UI.WinForms.BunifuTextBox();
@@ -87,6 +87,9 @@
             this.lblTotalAseg = new System.Windows.Forms.Label();
             this.lblTotalSeguros = new System.Windows.Forms.Label();
             this.dataGridDetalleSeguro = new System.Windows.Forms.DataGridView();
+            this.txtNitAseguradora = new ReporteAseguradoraCredito.Controls.RJTextBox();
+            this.lblNit = new Bunifu.UI.WinForms.BunifuLabel();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
             this.segurosPanelHeader.SuspendLayout();
             this.panelBodySeguros.SuspendLayout();
             this.grbConsolidadoClienteAseguradora.SuspendLayout();
@@ -103,10 +106,12 @@
             this.segurosPanelHeader.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("segurosPanelHeader.BackgroundImage")));
             this.segurosPanelHeader.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.segurosPanelHeader.BorderRadius = 1;
+            this.segurosPanelHeader.Controls.Add(this.iconButton1);
+            this.segurosPanelHeader.Controls.Add(this.lblNit);
+            this.segurosPanelHeader.Controls.Add(this.txtNitAseguradora);
             this.segurosPanelHeader.Controls.Add(this.lblFechaFin);
             this.segurosPanelHeader.Controls.Add(this.lblFechaIni);
             this.segurosPanelHeader.Controls.Add(this.fechaFinSeguros);
-            this.segurosPanelHeader.Controls.Add(this.btnPrueba);
             this.segurosPanelHeader.Controls.Add(this.bunifuLabel1);
             this.segurosPanelHeader.Controls.Add(this.txtReferenciaSeguro);
             this.segurosPanelHeader.Controls.Add(this.txtNoFelSeguros);
@@ -191,17 +196,6 @@
             this.fechaFinSeguros.Size = new System.Drawing.Size(193, 32);
             this.fechaFinSeguros.TabIndex = 12;
             this.fechaFinSeguros.Value = new System.DateTime(2023, 1, 5, 8, 50, 0, 0);
-            // 
-            // btnPrueba
-            // 
-            this.btnPrueba.Location = new System.Drawing.Point(483, 59);
-            this.btnPrueba.Margin = new System.Windows.Forms.Padding(4);
-            this.btnPrueba.Name = "btnPrueba";
-            this.btnPrueba.Size = new System.Drawing.Size(100, 28);
-            this.btnPrueba.TabIndex = 11;
-            this.btnPrueba.Text = "button1";
-            this.btnPrueba.UseVisualStyleBackColor = true;
-            this.btnPrueba.Click += new System.EventHandler(this.btnPrueba_Click);
             // 
             // bunifuLabel1
             // 
@@ -298,6 +292,7 @@
             this.txtReferenciaSeguro.TextPlaceholder = "No. Referencia";
             this.txtReferenciaSeguro.UseSystemPasswordChar = false;
             this.txtReferenciaSeguro.WordWrap = true;
+            this.txtReferenciaSeguro.TextChanged += new System.EventHandler(this.txtReferenciaSeguro_TextChanged);
             // 
             // txtNoFelSeguros
             // 
@@ -374,6 +369,7 @@
             this.txtNoFelSeguros.TextPlaceholder = "No. Fel";
             this.txtNoFelSeguros.UseSystemPasswordChar = false;
             this.txtNoFelSeguros.WordWrap = true;
+            this.txtNoFelSeguros.TextChanged += new System.EventHandler(this.txtNoFelSeguros_TextChanged);
             // 
             // txtClienteSeguros
             // 
@@ -450,6 +446,7 @@
             this.txtClienteSeguros.TextPlaceholder = "Cliente";
             this.txtClienteSeguros.UseSystemPasswordChar = false;
             this.txtClienteSeguros.WordWrap = true;
+            this.txtClienteSeguros.TextChanged += new System.EventHandler(this.txtClienteSeguros_TextChanged);
             // 
             // txtConvenioSeguro
             // 
@@ -526,6 +523,7 @@
             this.txtConvenioSeguro.TextPlaceholder = "Convenio";
             this.txtConvenioSeguro.UseSystemPasswordChar = false;
             this.txtConvenioSeguro.WordWrap = true;
+            this.txtConvenioSeguro.TextChanged += new System.EventHandler(this.txtConvenioSeguro_TextChanged);
             // 
             // txtSerieOrgSeguro
             // 
@@ -602,6 +600,7 @@
             this.txtSerieOrgSeguro.TextPlaceholder = "Serie Origen";
             this.txtSerieOrgSeguro.UseSystemPasswordChar = false;
             this.txtSerieOrgSeguro.WordWrap = true;
+            this.txtSerieOrgSeguro.TextChanged += new System.EventHandler(this.txtSerieOrgSeguro_TextChanged);
             // 
             // txtNoOrgSeguro
             // 
@@ -678,6 +677,7 @@
             this.txtNoOrgSeguro.TextPlaceholder = "Numero Origen";
             this.txtNoOrgSeguro.UseSystemPasswordChar = false;
             this.txtNoOrgSeguro.WordWrap = true;
+            this.txtNoOrgSeguro.TextChanged += new System.EventHandler(this.txtNoOrgSeguro_TextChanged);
             // 
             // txtMontoSeguro
             // 
@@ -754,6 +754,7 @@
             this.txtMontoSeguro.TextPlaceholder = "Monto Venta";
             this.txtMontoSeguro.UseSystemPasswordChar = false;
             this.txtMontoSeguro.WordWrap = true;
+            this.txtMontoSeguro.TextChanged += new System.EventHandler(this.txtMontoSeguro_TextChanged);
             // 
             // txtSerieSeguro
             // 
@@ -831,7 +832,6 @@
             this.txtSerieSeguro.UseSystemPasswordChar = false;
             this.txtSerieSeguro.WordWrap = true;
             this.txtSerieSeguro.TextChanged += new System.EventHandler(this.txtSerieSeguro_TextChanged);
-            this.txtSerieSeguro.Enter += new System.EventHandler(this.txtSerieSeguro_Enter);
             // 
             // fechaIniSeguro
             // 
@@ -1006,9 +1006,71 @@
             this.dataGridDetalleSeguro.Location = new System.Drawing.Point(16, 30);
             this.dataGridDetalleSeguro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridDetalleSeguro.Name = "dataGridDetalleSeguro";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridDetalleSeguro.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridDetalleSeguro.RowTemplate.Height = 24;
             this.dataGridDetalleSeguro.Size = new System.Drawing.Size(774, 501);
             this.dataGridDetalleSeguro.TabIndex = 0;
+            // 
+            // txtNitAseguradora
+            // 
+            this.txtNitAseguradora.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(18)))), ((int)(((byte)(86)))));
+            this.txtNitAseguradora.BorderColor = System.Drawing.Color.MediumSlateBlue;
+            this.txtNitAseguradora.BorderFocusColor = System.Drawing.Color.HotPink;
+            this.txtNitAseguradora.BorderRadius = 0;
+            this.txtNitAseguradora.BorderSize = 2;
+            this.txtNitAseguradora.Cursor = System.Windows.Forms.Cursors.Default;
+            this.txtNitAseguradora.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNitAseguradora.ForeColor = System.Drawing.Color.White;
+            this.txtNitAseguradora.Location = new System.Drawing.Point(497, 53);
+            this.txtNitAseguradora.Multiline = false;
+            this.txtNitAseguradora.Name = "txtNitAseguradora";
+            this.txtNitAseguradora.Padding = new System.Windows.Forms.Padding(10, 7, 10, 7);
+            this.txtNitAseguradora.PasswordChar = false;
+            this.txtNitAseguradora.PlaceholderColor = System.Drawing.Color.DarkGray;
+            this.txtNitAseguradora.PlaceholderText = "";
+            this.txtNitAseguradora.Size = new System.Drawing.Size(250, 38);
+            this.txtNitAseguradora.TabIndex = 15;
+            this.txtNitAseguradora.Texts = "";
+            this.txtNitAseguradora.UnderlinedStyle = true;
+            // 
+            // lblNit
+            // 
+            this.lblNit.AllowParentOverrides = false;
+            this.lblNit.AutoEllipsis = false;
+            this.lblNit.CursorType = null;
+            this.lblNit.Font = new System.Drawing.Font("Segoe UI", 10.2F);
+            this.lblNit.ForeColor = System.Drawing.Color.White;
+            this.lblNit.Location = new System.Drawing.Point(498, 29);
+            this.lblNit.Name = "lblNit";
+            this.lblNit.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblNit.Size = new System.Drawing.Size(156, 23);
+            this.lblNit.TabIndex = 16;
+            this.lblNit.Text = "NIT ASEGURADORA:";
+            this.lblNit.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lblNit.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.FlatAppearance.BorderSize = 0;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Icon = FontAwesome.Sharp.IconChar.SearchPlus;
+            this.iconButton1.IconColor = System.Drawing.Color.White;
+            this.iconButton1.IconSize = 32;
+            this.iconButton1.Image = ((System.Drawing.Image)(resources.GetObject("iconButton1.Image")));
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(787, 37);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(176, 54);
+            this.iconButton1.TabIndex = 17;
+            this.iconButton1.Text = "GENERAR";
+            this.iconButton1.UseVisualStyleBackColor = true;
             // 
             // SegurosWFM
             // 
@@ -1056,12 +1118,14 @@
         private System.Windows.Forms.GroupBox grbConsolidadoClienteAseguradora;
         private System.Windows.Forms.DataGridView dataGridConsolidadoCliente;
         private System.Windows.Forms.Label lblTotalSeguros;
-        private System.Windows.Forms.Button btnPrueba;
         private Bunifu.UI.WinForms.BunifuLabel lblFechaFin;
         private Bunifu.UI.WinForms.BunifuLabel lblFechaIni;
         private Bunifu.UI.WinForms.BunifuDatePicker fechaFinSeguros;
         private System.Windows.Forms.Label lblTotalAseg;
         private System.Windows.Forms.Label lblTotalClie;
         private System.Windows.Forms.Label lblTotalCliente;
+        private Controls.RJTextBox txtNitAseguradora;
+        private Bunifu.UI.WinForms.BunifuLabel lblNit;
+        private FontAwesome.Sharp.IconButton iconButton1;
     }
 }

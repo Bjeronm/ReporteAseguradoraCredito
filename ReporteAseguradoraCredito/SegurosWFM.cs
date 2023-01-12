@@ -16,107 +16,27 @@ namespace ReporteAseguradoraCredito
 {
     public partial class SegurosWFM : Form
     {
+        DataTable dt = new DataTable();
+        public List<SegurosViewModel> dataSeguros { get; set; }
+
         public SegurosWFM()
         {
             InitializeComponent();
         }
         
-
-        private void obtenerDatos()
-        {
-            string conn = ConfigurationManager.ConnectionStrings["ReporteAseguradoraCredito.Properties.Settings.Reportes"].ConnectionString;
-            using (SqlConnection connection = new SqlConnection(conn))
-            {
-                using (SqlCommand command = new SqlCommand("USP_CAC_GET_VENTAS_ASEGURADORAS", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    DataTable result = new DataTable();
-                    DataSet dataSet = new DataSet();
-
-                    try
-                    {
-                        if(txtSerieSeguro.Text == "")
-                        {
-                            connection.Open();
-                            //command.Parameters.AddWithValue("@FECHA_INI",fechaIniSeguro.Value.Date.ToString("yyyyMMdd"));
-                            //command.Parameters.AddWithValue("@FECHA_FIN",fechaFinSeguros.Value.Date.ToString("yyyyMMdd"));
-                            SqlDataAdapter DA = new SqlDataAdapter(command);
-                            DA.SelectCommand.Parameters.AddWithValue("@FECHA_INI", fechaIniSeguro.Value.Date.ToString("yyyyMMdd"));
-                            DA.SelectCommand.Parameters.AddWithValue("@FECHA_FIN", fechaFinSeguros.Value.Date.ToString("yyyyMMdd"));
-                            DA.Fill(dataSet);
-                            dataSet.Tables.Add(result);
-                            var totalFacAnul = dataSet.Tables[0];
-                            //var serie = totalFacAnul.Where(row => row.Equals("[Serie Aseguradora]") = txtSerieSeguro.Text);
-                            //var resultSum = totalFacAnul.Compute("Sum([Total Aseguradora])", "Estado = 0 and [Tipo Documento] = 2");
-                            //lblTotalAseg.Text = resultSum.ToString();
-                            dataGridDetalleSeguro.DataSource = dataSet.Tables[0];
-                            int c = dataGridDetalleSeguro.Rows.Count;
-                            for (int i = 0; i < c; i++)
-                            {
-                                if (dataGridDetalleSeguro.Rows[i].Cells[11].Value.ToString() == "4" || dataGridDetalleSeguro.Rows[i].Cells[26].Value.ToString() == "0")
-                                {
-                                    dataGridDetalleSeguro.Rows[i].DefaultCellStyle.ForeColor = Color.White;
-                                    dataGridDetalleSeguro.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(236, 72, 36);
-                                }
-                                /*else if (dataGridDetalleSeguro.Rows[i].Cells[26].Value.ToString() == "0")
-                                {
-                                    dataGridDetalleSeguro.Rows[i].DefaultCellStyle.ForeColor = Color.FromArgb(255, 255, 255);
-                                    dataGridDetalleSeguro.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(149, 145, 144);
-                                }*/
-                                /*else if(dataGridDetalleSeguro.Rows[i].Cells[26].Value.ToString() == "1")
-                                {
-                                    dataGridDetalleSeguro.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(48, 189, 34);
-                                }*/
-
-                            }
-
-                            var consolidadoAseguradora = dataSet.Tables[2];
-                            dataGridConsolidadoSeguro.DataSource = consolidadoAseguradora;
-                            var sumaConsolidadoAseguradora = consolidadoAseguradora.Compute("Sum(Total)", "");
-                            consolidadoAseguradora.Rows.Add(new object[] { 0, "TOTAL", sumaConsolidadoAseguradora });
-
-                            var totalAseguradora = dataSet.Tables[1];
-                            lblTotalAseg.Text = totalAseguradora.Rows[0]["Total"].ToString();
-
-                            //consolidado cliente
-                            var totalCliente = dataSet.Tables[3];
-                            lblTotalClie.Text = totalCliente.Rows[0]["Total"].ToString();
-
-                            var ConsolidadoCliente = dataSet.Tables[4];
-                            dataGridConsolidadoCliente.DataSource = ConsolidadoCliente;
-                            var sumaConsolidadoCliente = ConsolidadoCliente.Compute("Sum(Total)", "");
-                            ConsolidadoCliente.Rows.Add(new object[] { 0, "TOTAL", sumaConsolidadoCliente });
-
-                        }
-                        else
-                        {
-                            DataTable detalles = dataSet.Tables[0];
-                            EnumerableRowCollection<DataRow> query = from res in detalles.AsEnumerable()
-                                                                     where res.Field<string>(2) == txtSerieSeguro.Text
-                                                                     select res;
-                            DataView view = query.AsDataView();
-                            dataGridDetalleSeguro.DataSource = view;
-
-                        }
-
-
-                    }
-                    catch(Exception e)
-                    {
-                        MessageBox.Show(e.Message, "Error Message");
-                    }
-                }
-            }
-        }
-
         private void getVentasAseguradoras()
         {
+            dt = new DataTable();
+
             //datagrid detalle seguros
             var fechaI = fechaIniSeguro.Value.Date.ToString("yyyyMMdd");
             var fechaF = fechaFinSeguros.Value.Date.ToString("yyyyMMdd");
             Seguros seguros = new Seguros();
             DataSet data = seguros.getSeguros("USP_CAC_GET_VENTAS_ASEGURADORAS",fechaI,fechaF);
+            dt = data.Tables[0];
+            var tablaSeguros = data.Tables[0];
             dataGridDetalleSeguro.DataSource = data.Tables[0];
+            
 
             int c = dataGridDetalleSeguro.Rows.Count;
             for (int i = 0; i < c; i++)
@@ -150,58 +70,207 @@ namespace ReporteAseguradoraCredito
             dataGridConsolidadoCliente.DataSource = consolidadoCliente;
             var sumaConsolidadoCliente = consolidadoCliente.Compute("Sum(Total)", "");
             consolidadoCliente.Rows.Add(new object[] {0, "TOTAL" , sumaConsolidadoCliente });
-
             
-            //filtro por serie
-            DataTable filtro = data.Tables[0];
-            EnumerableRowCollection<DataRow> query = from res in filtro.AsEnumerable()
-                                                     where res.Field<string>(2).StartsWith(txtSerieSeguro.Text.ToUpper().ToString()) 
-                                                     select res;
-            DataView view = query.AsDataView();
-            dataGridDetalleSeguro.DataSource = view;
+            dataSeguros = new List<SegurosViewModel>();
 
+            foreach (DataRow rows in tablaSeguros.Rows)
+            {
+                var segurosModel = new SegurosViewModel()
+                {
+                    Fecha = Convert.ToString(rows[0]),
+                    Sucursal = Convert.ToString(rows[1]),
+                    Serie = Convert.ToString(rows[2]),
+                    Numero = Convert.ToString(rows[3]),
+                    SerieOrigen = Convert.ToString(rows[4]),
+                    NumeroOrigen = Convert.ToString(rows[5]),
+                    SerieFel = Convert.ToString(rows[6]),
+                    NumeroFel = Convert.ToString(rows[7]),
+                    RequestId = Convert.ToString(rows[8]),
+                    Convenio = Convert.ToString(rows[9]),
+                    Autorizacion = Convert.ToString(rows[10]),
+                    TipoDocumentoAs = Convert.ToString(rows[11]),
+                    NombreA = Convert.ToString(rows[12]),
+                    NitA = Convert.ToString(rows[13]),
+                    CanalVenta = Convert.ToString(rows[14]),
+                    TotalA = Convert.ToDecimal(rows[15]),
+                    SerieB = Convert.ToString(rows[16]),
+                    NumeroB = Convert.ToString(rows[17]),
+                    SerieOrigenB = Convert.ToString(rows[18]),
+                    NumeroOrigenB = Convert.ToString(rows[19]),
+                    SerieFelB = Convert.ToString(rows[20]),
+                    NumeroFelB = Convert.ToString(rows[21]),
+                    RequestIdB = Convert.ToString(rows[22]),
+                    NombreB = Convert.ToString(rows[23]),
+                    NitB = Convert.ToString(rows[24]),
+                    TotalB = Convert.ToDecimal(rows[25]),
+                    Estado = Convert.ToInt32(rows[26])
+                };
 
-            //filtro por No. Referencia 
-           /* DataTable filtro2 = data.Tables[0];
-            EnumerableRowCollection<DataRow> query2 = from res2 in filtro2.AsEnumerable()
-                                                      where res2.Field<string>(23).StartsWith(txtClienteSeguros.Text.ToUpper().ToString())
-                                                      select res2;
-            DataView view2 = query2.AsDataView();
-            dataGridDetalleSeguro.DataSource = view2;*/
+                dataSeguros.Add(segurosModel);
+            }
+            
 
         }
+        
 
         private void btnPrueba_Click(object sender, EventArgs e)
         {
-            //obtenerDatos();
             getVentasAseguradoras();
         }
 
         private void txtSerieSeguro_TextChanged(object sender, EventArgs e)
         {
-            /*Seguros verificar = new Seguros();
-            DataSet data = verificar.searchSeguros();
-            DataTable detalle = data.Tables[0];*/
-            /* var fechaI = fechaIniSeguro.Value.Date.ToString("yyyyMMdd");
-             var fechaF = fechaFinSeguros.Value.Date.ToString("yyyyMMdd");
-             Seguros filtrarSeguros = new Seguros();
-             DataSet tablaDetalle = filtrarSeguros.getSeguros("USP_CAC_GET_VENTAS_ASEGURADORAS", fechaI, fechaF);
-
-             DataTable filtro = tablaDetalle.Tables[0];
-             EnumerableRowCollection<DataRow> query = from res in filtro.AsEnumerable()
-                                                      where res.Field<string>(2).StartsWith(txtSerieSeguro.Text.ToUpper().ToString())
-                                                      select res;
-             DataView view = query.AsDataView();
-             dataGridDetalleSeguro.DataSource = view;*/
-
-          //  getVentasAseguradoras();
+            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+                                                                                AND [Numero Fel Asegu] LIKE '%{2}%'
+                                                                                AND [Nombre Cliente] LIKE '%{3}%'
+                                                                                AND [Convenio] LIKE '%{4}%'
+                                                                                AND [Serie Origen Asegu] LIKE '%{5}%'
+                                                                                AND [Numero Origen Asegu] LIKE '%{6}%'
+                                                                                AND [Total Aseguradora] LIKE '%{7}%'", txtSerieSeguro.Text.ToUpper().Trim()
+                                                                                ,txtReferenciaSeguro.Text.Trim()
+                                                                                ,txtNoFelSeguros.Text.Trim()
+                                                                                ,txtClienteSeguros.Text.ToUpper().Trim()
+                                                                                ,txtConvenioSeguro.Text.Trim()
+                                                                                ,txtSerieOrgSeguro.Text.ToUpper().Trim()
+                                                                                ,txtNoOrgSeguro.Text.Trim()
+                                                                                ,txtMontoSeguro.Text.Trim());
+            dataGridDetalleSeguro.DataSource = dt;
         }
-        
 
-        private void txtSerieSeguro_Enter(object sender, EventArgs e)
+        private void txtReferenciaSeguro_TextChanged(object sender, EventArgs e)
         {
-            getVentasAseguradoras();
+            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+                                                                                AND [Numero Fel Asegu] LIKE '%{2}%'
+                                                                                AND [Nombre Cliente] LIKE '%{3}%'
+                                                                                AND [Convenio] LIKE '%{4}%'
+                                                                                AND [Serie Origen Asegu] LIKE '%{5}%'
+                                                                                AND [Numero Origen Asegu] LIKE '%{6}%'
+                                                                                AND [Total Aseguradora] LIKE '%{7}%'", txtSerieSeguro.Text.ToUpper().Trim()
+                                                                                , txtReferenciaSeguro.Text.Trim()
+                                                                                , txtNoFelSeguros.Text.Trim()
+                                                                                , txtClienteSeguros.Text.ToUpper().Trim()
+                                                                                , txtConvenioSeguro.Text.Trim()
+                                                                                , txtSerieOrgSeguro.Text.ToUpper().Trim()
+                                                                                , txtNoOrgSeguro.Text.Trim()
+                                                                                , txtMontoSeguro.Text.Trim());
+            dataGridDetalleSeguro.DataSource = dt;
         }
+
+        private void txtClienteSeguros_TextChanged(object sender, EventArgs e)
+        {
+            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+                                                                                AND [Numero Fel Asegu] LIKE '%{2}%'
+                                                                                AND [Nombre Cliente] LIKE '%{3}%'
+                                                                                AND [Convenio] LIKE '%{4}%'
+                                                                                AND [Serie Origen Asegu] LIKE '%{5}%'
+                                                                                AND [Numero Origen Asegu] LIKE '%{6}%'
+                                                                                AND [Total Aseguradora] LIKE '%{7}%'", txtSerieSeguro.Text.ToUpper().Trim()
+                                                                                , txtReferenciaSeguro.Text.Trim()
+                                                                                , txtNoFelSeguros.Text.Trim()
+                                                                                , txtClienteSeguros.Text.ToUpper().Trim()
+                                                                                , txtConvenioSeguro.Text.Trim()
+                                                                                , txtSerieOrgSeguro.Text.ToUpper().Trim()
+                                                                                , txtNoOrgSeguro.Text.Trim()
+                                                                                , txtMontoSeguro.Text.Trim());
+            dataGridDetalleSeguro.DataSource = dt;
+        }
+
+        private void txtNoFelSeguros_TextChanged(object sender, EventArgs e)
+        {
+            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+                                                                                AND [Numero Fel Asegu] LIKE '%{2}%'
+                                                                                AND [Nombre Cliente] LIKE '%{3}%'
+                                                                                AND [Convenio] LIKE '%{4}%'
+                                                                                AND [Serie Origen Asegu] LIKE '%{5}%'
+                                                                                AND [Numero Origen Asegu] LIKE '%{6}%'
+                                                                                AND [Total Aseguradora] LIKE '%{7}%'", txtSerieSeguro.Text.ToUpper().Trim()
+                                                                                , txtReferenciaSeguro.Text.Trim()
+                                                                                , txtNoFelSeguros.Text.Trim()
+                                                                                , txtClienteSeguros.Text.ToUpper().Trim()
+                                                                                , txtConvenioSeguro.Text.Trim()
+                                                                                , txtSerieOrgSeguro.Text.ToUpper().Trim()
+                                                                                , txtNoOrgSeguro.Text.Trim()
+                                                                                , txtMontoSeguro.Text.Trim());
+            dataGridDetalleSeguro.DataSource = dt;
+        }
+
+        private void txtConvenioSeguro_TextChanged(object sender, EventArgs e)
+        {
+            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+                                                                                AND [Numero Fel Asegu] LIKE '%{2}%'
+                                                                                AND [Nombre Cliente] LIKE '%{3}%'
+                                                                                AND [Convenio] LIKE '%{4}%'
+                                                                                AND [Serie Origen Asegu] LIKE '%{5}%'
+                                                                                AND [Numero Origen Asegu] LIKE '%{6}%'
+                                                                                AND [Total Aseguradora] LIKE '%{7}%'", txtSerieSeguro.Text.ToUpper().Trim()
+                                                                                , txtReferenciaSeguro.Text.Trim()
+                                                                                , txtNoFelSeguros.Text.Trim()
+                                                                                , txtClienteSeguros.Text.ToUpper().Trim()
+                                                                                , txtConvenioSeguro.Text.Trim()
+                                                                                , txtSerieOrgSeguro.Text.ToUpper().Trim()
+                                                                                , txtNoOrgSeguro.Text.Trim()
+                                                                                , txtMontoSeguro.Text.Trim());
+            dataGridDetalleSeguro.DataSource = dt;
+        }
+
+        private void txtSerieOrgSeguro_TextChanged(object sender, EventArgs e)
+        {
+            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+                                                                                AND [Numero Fel Asegu] LIKE '%{2}%'
+                                                                                AND [Nombre Cliente] LIKE '%{3}%'
+                                                                                AND [Convenio] LIKE '%{4}%'
+                                                                                AND [Serie Origen Asegu] LIKE '%{5}%'
+                                                                                AND [Numero Origen Asegu] LIKE '%{6}%'
+                                                                                AND [Total Aseguradora] LIKE '%{7}%'", txtSerieSeguro.Text.ToUpper().Trim()
+                                                                                , txtReferenciaSeguro.Text.Trim()
+                                                                                , txtNoFelSeguros.Text.Trim()
+                                                                                , txtClienteSeguros.Text.ToUpper().Trim()
+                                                                                , txtConvenioSeguro.Text.Trim()
+                                                                                , txtSerieOrgSeguro.Text.ToUpper().Trim()
+                                                                                , txtNoOrgSeguro.Text.Trim()
+                                                                                , txtMontoSeguro.Text.Trim());
+            dataGridDetalleSeguro.DataSource = dt;
+        }
+
+        private void txtNoOrgSeguro_TextChanged(object sender, EventArgs e)
+        {
+            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+                                                                                AND [Numero Fel Asegu] LIKE '%{2}%'
+                                                                                AND [Nombre Cliente] LIKE '%{3}%'
+                                                                                AND [Convenio] LIKE '%{4}%'
+                                                                                AND [Serie Origen Asegu] LIKE '%{5}%'
+                                                                                AND [Numero Origen Asegu] LIKE '%{6}%'
+                                                                                AND [Total Aseguradora] LIKE '%{7}%'", txtSerieSeguro.Text.ToUpper().Trim()
+                                                                                , txtReferenciaSeguro.Text.Trim()
+                                                                                , txtNoFelSeguros.Text.Trim()
+                                                                                , txtClienteSeguros.Text.ToUpper().Trim()
+                                                                                , txtConvenioSeguro.Text.Trim()
+                                                                                , txtSerieOrgSeguro.Text.ToUpper().Trim()
+                                                                                , txtNoOrgSeguro.Text.Trim()
+                                                                                , txtMontoSeguro.Text.Trim());
+            dataGridDetalleSeguro.DataSource = dt;
+        }
+
+        private void txtMontoSeguro_TextChanged(object sender, EventArgs e)
+        {
+            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+                                                                                AND [Numero Fel Asegu] LIKE '%{2}%'
+                                                                                AND [Nombre Cliente] LIKE '%{3}%'
+                                                                                AND [Convenio] LIKE '%{4}%'
+                                                                                AND [Serie Origen Asegu] LIKE '%{5}%'
+                                                                                AND [Numero Origen Asegu] LIKE '%{6}%'
+                                                                                AND [Total Aseguradora] LIKE '%{7}%'", txtSerieSeguro.Text.ToUpper().Trim()
+                                                                                , txtReferenciaSeguro.Text.Trim()
+                                                                                , txtNoFelSeguros.Text.Trim()
+                                                                                , txtClienteSeguros.Text.ToUpper().Trim()
+                                                                                , txtConvenioSeguro.Text.Trim()
+                                                                                , txtSerieOrgSeguro.Text.ToUpper().Trim()
+                                                                                , txtNoOrgSeguro.Text.Trim()
+                                                                                , txtMontoSeguro.Text.Trim());
+            dataGridDetalleSeguro.DataSource = dt;
+        }
+
+
 
         /* private void txtSerieSeguro_TextChanged(object sender, EventArgs e)
          {

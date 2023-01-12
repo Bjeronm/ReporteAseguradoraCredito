@@ -400,6 +400,30 @@
         17XIq2odI2wAAAAASUVORK5CYII=
 </value>
   </data>
+  <data name="iconButton1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAS
+        dAAAEnQB3mYfeAAAAXlJREFUWEftluFxgzAMhRmABbIAC3SBTJBF2KArdIXMkCWyRYaBvuc8XEumrQHz
+        Izm+Ox1YQtLDdkyag5dhHMcW9pGaQvvCRsMwXHGdBbEv2EmP1wO1278ae/Dsp1K3g3psfn+WLoezoRLb
+        mHtzFseFa8+9QDvLZ4Bv20ygxvlZ6gcU7RSmuA4W1xxhijKk8cUg2Ux92pzId9MwAJcRgfi6paBy1Qhg
+        3CsUkd8IIGwakoTcy0CRi/IDFKRQRP5MANx+6ZafEyjcKzkgH9f8NplCQURinDluzJQ6AnDJNpkHeR0u
+        VQSYJQCtQhE6+dYaRuD2QlcJ4JtEKEihiPz/bkKQiS8ChR4qMGEK0eEFYOyFXxVaDpL9L4HnQhSBe36c
+        zMEUHrRs+1KqqUHCohCMTzCzaRPWTf8EC8yJKEW5byCCoNAF5jdmRI34Zcz2QjURhA1gFNPLeG+Oaoz3
+        FVHCLyLq/FEpxYvAODu4dociYHfYg/dyHxwcOJrmG2dhPab1jiz4AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="fechaFinCreditos.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAFsSURBVFhH7ZbRTcMwEIaD2IBaSCzAI488MwDDsAFMgGiz
+        BQMhkaqzmN71i2PHcRrHCQLBJ1Wy/7vz/bWdtFUfC0yzoXx2/b+B7zfwdn24o0aLGAbjqaTqpYfMByFH
+        2V193jMMxlMZq6ddDHGHFM5p3pKqp10M8dWhXQzx1aFdDPHVoV0M8XRCISz/iwwwdSBn6y3If9jAWaj7
+        OQZKqc3hdrvZv7CsQzSJkdZBvNiArezF1jRPLJdEc465lMUGmDqQR7daFkR21KZ5fDUfN/KRMXJHa4Jp
+        kQH/m9eb/QNyhMRI051QkflsA3KuSEFzpMCo4JvQO8F4tgH/wiEpSJEBgZDdmeZ5NHEKlOuZIynIg+v6
+        d8Ilvlf2kngWlFu5bEgK8qABySXcGciFtc4a6COxwID/pzQH7XKEafII+kgsOIJSUpdwDNJPl7CU1GOY
+        InoMl6DoRbQERa/ipZAF/Z1IoTlLN/eRc53+c1xVX4dGuB4mc/rBAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="bunifuLabel1.BaseStylesheet" xml:space="preserve">
     <value>#bunifu-label { padding: 0px; font-family: 'Segoe UI'; font-size: 24pt; width: 100%; height: 100%; font-style: normal; font-weight: normal; text-decoration: none; color: rgb(255, 255, 255); text-align: left; }</value>
   </data>
@@ -467,7 +491,7 @@
         rkJggg==
 </value>
   </data>
-  <data name="bunifuDatePicker1.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="fechaIniCreditos.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAFsSURBVFhH7ZbRTcMwEIaD2IBaSCzAI488MwDDsAFMgGiz
