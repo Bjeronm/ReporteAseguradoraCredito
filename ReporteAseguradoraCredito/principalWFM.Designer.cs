@@ -135,7 +135,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "principalWFM";
-            this.Text = "Reportes";
+            this.Text = "REPORTES VENTAS ASEGURADORAS Y VENTAS CREDIRTO 1.0.0";
             this.Load += new System.EventHandler(this.principalWFM_Load);
             this.bunifuGradientPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
