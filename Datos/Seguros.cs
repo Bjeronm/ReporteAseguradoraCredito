@@ -39,34 +39,39 @@ namespace Datos
             }
         }*/
 
-        public DataSet getSeguros(string SPSeguros, string fechaIni,string fechaFin)
+        public Task<DataSet> getSeguros(string SPSeguros, string fechaIni,string fechaFin, string nit)
         {
-            string conn = ConfigurationManager.ConnectionStrings["ReporteAseguradoraCredito.Properties.Settings.Reportes"].ConnectionString;
-            using (SqlConnection connection = new SqlConnection(conn))
+            return Task.Run(() => 
             {
-                using (SqlCommand command = new SqlCommand(SPSeguros, connection))
+                string conn = ConfigurationManager.ConnectionStrings["ReporteAseguradoraCredito.Properties.Settings.Reportes"].ConnectionString;
+                using (SqlConnection connection = new SqlConnection(conn))
                 {
-                    command.CommandType = CommandType.StoredProcedure;
-                    DataTable result = new DataTable();
-                    DataSet dataSet = new DataSet();
+                    using (SqlCommand command = new SqlCommand(SPSeguros, connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        DataTable result = new DataTable();
+                        DataSet dataSet = new DataSet();
 
-                    try
-                    {
-                        connection.Open();
-                        SqlDataAdapter DA = new SqlDataAdapter(command);
-                        DA.SelectCommand.Parameters.AddWithValue("@FECHA_INI", fechaIni);
-                        DA.SelectCommand.Parameters.AddWithValue("@FECHA_FIN", fechaFin);
-                        DA.Fill(dataSet);
-                        dataSet.Tables.Add(result);
-                        return dataSet;
-                    }
-                    catch (Exception e)
-                    {
-                        MessageBox.Show(e.Message, "Error Message");
-                        return null;
+                        try
+                        {
+                            connection.Open();
+                            SqlDataAdapter DA = new SqlDataAdapter(command);
+                            DA.SelectCommand.Parameters.AddWithValue("@FECHA_INI", fechaIni);
+                            DA.SelectCommand.Parameters.AddWithValue("@FECHA_FIN", fechaFin);
+                            DA.SelectCommand.Parameters.AddWithValue("@NIT_ASEGURADORA", nit);
+                            DA.SelectCommand.CommandTimeout = 300;
+                            DA.Fill(dataSet);
+                            dataSet.Tables.Add(result);
+                            return dataSet;
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show(e.Message, "Error Message");
+                            return null;
+                        }
                     }
                 }
-            }
+            }); 
         }
     }
 }

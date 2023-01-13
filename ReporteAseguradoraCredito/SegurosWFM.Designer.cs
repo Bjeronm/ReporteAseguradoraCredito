@@ -62,7 +62,17 @@
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties31 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             Bunifu.UI.WinForms.BunifuTextBox.StateProperties stateProperties32 = new Bunifu.UI.WinForms.BunifuTextBox.StateProperties();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.segurosPanelHeader = new Bunifu.UI.WinForms.BunifuGradientPanel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btnExportarSeguro = new FontAwesome.Sharp.IconButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnGenerarSeguro = new FontAwesome.Sharp.IconButton();
+            this.lblNit = new Bunifu.UI.WinForms.BunifuLabel();
             this.lblFechaFin = new Bunifu.UI.WinForms.BunifuLabel();
             this.lblFechaIni = new Bunifu.UI.WinForms.BunifuLabel();
             this.fechaFinSeguros = new Bunifu.UI.WinForms.BunifuDatePicker();
@@ -88,9 +98,11 @@
             this.lblTotalSeguros = new System.Windows.Forms.Label();
             this.dataGridDetalleSeguro = new System.Windows.Forms.DataGridView();
             this.txtNitAseguradora = new ReporteAseguradoraCredito.Controls.RJTextBox();
-            this.lblNit = new Bunifu.UI.WinForms.BunifuLabel();
-            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.reloadSeguro = new System.Windows.Forms.PictureBox();
+            this.exReload = new System.Windows.Forms.PictureBox();
             this.segurosPanelHeader.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panelBodySeguros.SuspendLayout();
             this.grbConsolidadoClienteAseguradora.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConsolidadoCliente)).BeginInit();
@@ -98,6 +110,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConsolidadoSeguro)).BeginInit();
             this.groupBoxDetalleSeguros.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDetalleSeguro)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reloadSeguro)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exReload)).BeginInit();
             this.SuspendLayout();
             // 
             // segurosPanelHeader
@@ -106,7 +120,10 @@
             this.segurosPanelHeader.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("segurosPanelHeader.BackgroundImage")));
             this.segurosPanelHeader.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.segurosPanelHeader.BorderRadius = 1;
-            this.segurosPanelHeader.Controls.Add(this.iconButton1);
+            this.segurosPanelHeader.Controls.Add(this.panel3);
+            this.segurosPanelHeader.Controls.Add(this.btnExportarSeguro);
+            this.segurosPanelHeader.Controls.Add(this.panel1);
+            this.segurosPanelHeader.Controls.Add(this.btnGenerarSeguro);
             this.segurosPanelHeader.Controls.Add(this.lblNit);
             this.segurosPanelHeader.Controls.Add(this.txtNitAseguradora);
             this.segurosPanelHeader.Controls.Add(this.lblFechaFin);
@@ -131,8 +148,96 @@
             this.segurosPanelHeader.Margin = new System.Windows.Forms.Padding(4);
             this.segurosPanelHeader.Name = "segurosPanelHeader";
             this.segurosPanelHeader.Quality = 10;
-            this.segurosPanelHeader.Size = new System.Drawing.Size(1448, 177);
+            this.segurosPanelHeader.Size = new System.Drawing.Size(1648, 177);
             this.segurosPanelHeader.TabIndex = 0;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(33)))), ((int)(((byte)(160)))));
+            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Location = new System.Drawing.Point(1070, 84);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(224, 10);
+            this.panel3.TabIndex = 20;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(33)))), ((int)(((byte)(160)))));
+            this.panel4.Location = new System.Drawing.Point(0, 26);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(211, 10);
+            this.panel4.TabIndex = 20;
+            // 
+            // btnExportarSeguro
+            // 
+            this.btnExportarSeguro.FlatAppearance.BorderSize = 0;
+            this.btnExportarSeguro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportarSeguro.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportarSeguro.ForeColor = System.Drawing.Color.White;
+            this.btnExportarSeguro.Icon = FontAwesome.Sharp.IconChar.Eject;
+            this.btnExportarSeguro.IconColor = System.Drawing.Color.White;
+            this.btnExportarSeguro.IconSize = 32;
+            this.btnExportarSeguro.Image = ((System.Drawing.Image)(resources.GetObject("btnExportarSeguro.Image")));
+            this.btnExportarSeguro.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExportarSeguro.Location = new System.Drawing.Point(1070, 32);
+            this.btnExportarSeguro.Name = "btnExportarSeguro";
+            this.btnExportarSeguro.Size = new System.Drawing.Size(224, 54);
+            this.btnExportarSeguro.TabIndex = 19;
+            this.btnExportarSeguro.Text = "EXPORTAR";
+            this.btnExportarSeguro.UseVisualStyleBackColor = true;
+            this.btnExportarSeguro.Click += new System.EventHandler(this.btnExportarSeguro_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(33)))), ((int)(((byte)(160)))));
+            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Location = new System.Drawing.Point(808, 84);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(211, 10);
+            this.panel1.TabIndex = 18;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(33)))), ((int)(((byte)(160)))));
+            this.panel2.Location = new System.Drawing.Point(0, 26);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(211, 10);
+            this.panel2.TabIndex = 20;
+            // 
+            // btnGenerarSeguro
+            // 
+            this.btnGenerarSeguro.FlatAppearance.BorderSize = 0;
+            this.btnGenerarSeguro.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGenerarSeguro.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGenerarSeguro.ForeColor = System.Drawing.Color.White;
+            this.btnGenerarSeguro.Icon = FontAwesome.Sharp.IconChar.SearchPlus;
+            this.btnGenerarSeguro.IconColor = System.Drawing.Color.White;
+            this.btnGenerarSeguro.IconSize = 32;
+            this.btnGenerarSeguro.Image = ((System.Drawing.Image)(resources.GetObject("btnGenerarSeguro.Image")));
+            this.btnGenerarSeguro.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnGenerarSeguro.Location = new System.Drawing.Point(808, 32);
+            this.btnGenerarSeguro.Name = "btnGenerarSeguro";
+            this.btnGenerarSeguro.Size = new System.Drawing.Size(211, 54);
+            this.btnGenerarSeguro.TabIndex = 17;
+            this.btnGenerarSeguro.Text = "GENERAR";
+            this.btnGenerarSeguro.UseVisualStyleBackColor = true;
+            this.btnGenerarSeguro.Click += new System.EventHandler(this.btnGenerarSeguro_Click);
+            // 
+            // lblNit
+            // 
+            this.lblNit.AllowParentOverrides = false;
+            this.lblNit.AutoEllipsis = false;
+            this.lblNit.CursorType = null;
+            this.lblNit.Font = new System.Drawing.Font("Segoe UI", 10.2F);
+            this.lblNit.ForeColor = System.Drawing.Color.White;
+            this.lblNit.Location = new System.Drawing.Point(498, 29);
+            this.lblNit.Name = "lblNit";
+            this.lblNit.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.lblNit.Size = new System.Drawing.Size(156, 23);
+            this.lblNit.TabIndex = 16;
+            this.lblNit.Text = "NIT ASEGURADORA:";
+            this.lblNit.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
+            this.lblNit.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
             // 
             // lblFechaFin
             // 
@@ -200,18 +305,17 @@
             // bunifuLabel1
             // 
             this.bunifuLabel1.AllowParentOverrides = false;
-            this.bunifuLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.bunifuLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.bunifuLabel1.AutoEllipsis = false;
             this.bunifuLabel1.Cursor = System.Windows.Forms.Cursors.Default;
             this.bunifuLabel1.CursorType = System.Windows.Forms.Cursors.Default;
-            this.bunifuLabel1.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.bunifuLabel1.Font = new System.Drawing.Font("Segoe UI", 28.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.bunifuLabel1.ForeColor = System.Drawing.Color.White;
-            this.bunifuLabel1.Location = new System.Drawing.Point(1021, 36);
+            this.bunifuLabel1.Location = new System.Drawing.Point(1352, 36);
             this.bunifuLabel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bunifuLabel1.Name = "bunifuLabel1";
             this.bunifuLabel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.bunifuLabel1.Size = new System.Drawing.Size(170, 55);
+            this.bunifuLabel1.Size = new System.Drawing.Size(201, 60);
             this.bunifuLabel1.TabIndex = 10;
             this.bunifuLabel1.Text = "SEGUROS";
             this.bunifuLabel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -867,6 +971,7 @@
             // 
             this.panelBodySeguros.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(93)))));
             this.panelBodySeguros.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelBodySeguros.Controls.Add(this.exReload);
             this.panelBodySeguros.Controls.Add(this.grbConsolidadoClienteAseguradora);
             this.panelBodySeguros.Controls.Add(this.grbConsololidadoAseguradora);
             this.panelBodySeguros.Controls.Add(this.groupBoxDetalleSeguros);
@@ -874,7 +979,7 @@
             this.panelBodySeguros.Location = new System.Drawing.Point(0, 177);
             this.panelBodySeguros.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelBodySeguros.Name = "panelBodySeguros";
-            this.panelBodySeguros.Size = new System.Drawing.Size(1448, 613);
+            this.panelBodySeguros.Size = new System.Drawing.Size(1648, 613);
             this.panelBodySeguros.TabIndex = 1;
             // 
             // grbConsolidadoClienteAseguradora
@@ -883,11 +988,11 @@
             this.grbConsolidadoClienteAseguradora.Controls.Add(this.dataGridConsolidadoCliente);
             this.grbConsolidadoClienteAseguradora.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grbConsolidadoClienteAseguradora.ForeColor = System.Drawing.Color.White;
-            this.grbConsolidadoClienteAseguradora.Location = new System.Drawing.Point(824, 266);
+            this.grbConsolidadoClienteAseguradora.Location = new System.Drawing.Point(1024, 266);
             this.grbConsolidadoClienteAseguradora.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grbConsolidadoClienteAseguradora.Name = "grbConsolidadoClienteAseguradora";
             this.grbConsolidadoClienteAseguradora.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.grbConsolidadoClienteAseguradora.Size = new System.Drawing.Size(597, 295);
+            this.grbConsolidadoClienteAseguradora.Size = new System.Drawing.Size(597, 281);
             this.grbConsolidadoClienteAseguradora.TabIndex = 2;
             this.grbConsolidadoClienteAseguradora.TabStop = false;
             this.grbConsolidadoClienteAseguradora.Text = "Consolidado Cliente";
@@ -896,6 +1001,14 @@
             // 
             this.dataGridConsolidadoCliente.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridConsolidadoCliente.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridConsolidadoCliente.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridConsolidadoCliente.Location = new System.Drawing.Point(5, 30);
             this.dataGridConsolidadoCliente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridConsolidadoCliente.Name = "dataGridConsolidadoCliente";
@@ -909,7 +1022,7 @@
             this.grbConsololidadoAseguradora.Controls.Add(this.dataGridConsolidadoSeguro);
             this.grbConsololidadoAseguradora.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grbConsololidadoAseguradora.ForeColor = System.Drawing.Color.White;
-            this.grbConsololidadoAseguradora.Location = new System.Drawing.Point(824, 16);
+            this.grbConsololidadoAseguradora.Location = new System.Drawing.Point(1024, 16);
             this.grbConsololidadoAseguradora.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grbConsololidadoAseguradora.Name = "grbConsololidadoAseguradora";
             this.grbConsololidadoAseguradora.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -923,6 +1036,14 @@
             this.dataGridConsolidadoSeguro.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridConsolidadoSeguro.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridConsolidadoSeguro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridConsolidadoSeguro.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridConsolidadoSeguro.Location = new System.Drawing.Point(5, 30);
             this.dataGridConsolidadoSeguro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridConsolidadoSeguro.Name = "dataGridConsolidadoSeguro";
@@ -935,6 +1056,7 @@
             this.groupBoxDetalleSeguros.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxDetalleSeguros.Controls.Add(this.reloadSeguro);
             this.groupBoxDetalleSeguros.Controls.Add(this.lblTotalClie);
             this.groupBoxDetalleSeguros.Controls.Add(this.lblTotalCliente);
             this.groupBoxDetalleSeguros.Controls.Add(this.lblTotalAseg);
@@ -946,7 +1068,7 @@
             this.groupBoxDetalleSeguros.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBoxDetalleSeguros.Name = "groupBoxDetalleSeguros";
             this.groupBoxDetalleSeguros.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBoxDetalleSeguros.Size = new System.Drawing.Size(806, 583);
+            this.groupBoxDetalleSeguros.Size = new System.Drawing.Size(1006, 583);
             this.groupBoxDetalleSeguros.TabIndex = 0;
             this.groupBoxDetalleSeguros.TabStop = false;
             this.groupBoxDetalleSeguros.Text = "Detalle";
@@ -956,7 +1078,7 @@
             this.lblTotalClie.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalClie.AutoSize = true;
             this.lblTotalClie.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalClie.Location = new System.Drawing.Point(629, 544);
+            this.lblTotalClie.Location = new System.Drawing.Point(829, 544);
             this.lblTotalClie.Name = "lblTotalClie";
             this.lblTotalClie.Size = new System.Drawing.Size(36, 28);
             this.lblTotalClie.TabIndex = 4;
@@ -967,7 +1089,7 @@
             this.lblTotalCliente.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalCliente.AutoSize = true;
             this.lblTotalCliente.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalCliente.Location = new System.Drawing.Point(467, 544);
+            this.lblTotalCliente.Location = new System.Drawing.Point(667, 544);
             this.lblTotalCliente.Name = "lblTotalCliente";
             this.lblTotalCliente.Size = new System.Drawing.Size(123, 28);
             this.lblTotalCliente.TabIndex = 3;
@@ -978,7 +1100,7 @@
             this.lblTotalAseg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalAseg.AutoSize = true;
             this.lblTotalAseg.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalAseg.Location = new System.Drawing.Point(280, 544);
+            this.lblTotalAseg.Location = new System.Drawing.Point(480, 544);
             this.lblTotalAseg.Name = "lblTotalAseg";
             this.lblTotalAseg.Size = new System.Drawing.Size(36, 28);
             this.lblTotalAseg.TabIndex = 2;
@@ -989,7 +1111,7 @@
             this.lblTotalSeguros.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalSeguros.AutoSize = true;
             this.lblTotalSeguros.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalSeguros.Location = new System.Drawing.Point(48, 544);
+            this.lblTotalSeguros.Location = new System.Drawing.Point(248, 544);
             this.lblTotalSeguros.Name = "lblTotalSeguros";
             this.lblTotalSeguros.Size = new System.Drawing.Size(175, 28);
             this.lblTotalSeguros.TabIndex = 1;
@@ -1003,19 +1125,27 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridDetalleSeguro.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridDetalleSeguro.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridDetalleSeguro.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridDetalleSeguro.Location = new System.Drawing.Point(16, 30);
             this.dataGridDetalleSeguro.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridDetalleSeguro.Name = "dataGridDetalleSeguro";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridDetalleSeguro.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridDetalleSeguro.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridDetalleSeguro.RowTemplate.Height = 24;
-            this.dataGridDetalleSeguro.Size = new System.Drawing.Size(774, 501);
+            this.dataGridDetalleSeguro.Size = new System.Drawing.Size(974, 501);
             this.dataGridDetalleSeguro.TabIndex = 0;
             // 
             // txtNitAseguradora
@@ -1039,44 +1169,42 @@
             this.txtNitAseguradora.TabIndex = 15;
             this.txtNitAseguradora.Texts = "";
             this.txtNitAseguradora.UnderlinedStyle = true;
+            this.txtNitAseguradora.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNitAseguradora_KeyPress);
             // 
-            // lblNit
+            // reloadSeguro
             // 
-            this.lblNit.AllowParentOverrides = false;
-            this.lblNit.AutoEllipsis = false;
-            this.lblNit.CursorType = null;
-            this.lblNit.Font = new System.Drawing.Font("Segoe UI", 10.2F);
-            this.lblNit.ForeColor = System.Drawing.Color.White;
-            this.lblNit.Location = new System.Drawing.Point(498, 29);
-            this.lblNit.Name = "lblNit";
-            this.lblNit.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblNit.Size = new System.Drawing.Size(156, 23);
-            this.lblNit.TabIndex = 16;
-            this.lblNit.Text = "NIT ASEGURADORA:";
-            this.lblNit.TextAlignment = System.Drawing.ContentAlignment.TopLeft;
-            this.lblNit.TextFormat = Bunifu.UI.WinForms.BunifuLabel.TextFormattingOptions.Default;
+            this.reloadSeguro.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.reloadSeguro.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
+            this.reloadSeguro.Image = ((System.Drawing.Image)(resources.GetObject("reloadSeguro.Image")));
+            this.reloadSeguro.Location = new System.Drawing.Point(449, 261);
+            this.reloadSeguro.Name = "reloadSeguro";
+            this.reloadSeguro.Size = new System.Drawing.Size(100, 50);
+            this.reloadSeguro.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.reloadSeguro.TabIndex = 5;
+            this.reloadSeguro.TabStop = false;
+            this.reloadSeguro.Visible = false;
             // 
-            // iconButton1
+            // exReload
             // 
-            this.iconButton1.FlatAppearance.BorderSize = 0;
-            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton1.Icon = FontAwesome.Sharp.IconChar.SearchPlus;
-            this.iconButton1.IconColor = System.Drawing.Color.White;
-            this.iconButton1.IconSize = 32;
-            this.iconButton1.Image = ((System.Drawing.Image)(resources.GetObject("iconButton1.Image")));
-            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton1.Location = new System.Drawing.Point(787, 37);
-            this.iconButton1.Name = "iconButton1";
-            this.iconButton1.Size = new System.Drawing.Size(176, 54);
-            this.iconButton1.TabIndex = 17;
-            this.iconButton1.Text = "GENERAR";
-            this.iconButton1.UseVisualStyleBackColor = true;
+            this.exReload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.exReload.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(51)))), ((int)(((byte)(93)))));
+            this.exReload.Image = ((System.Drawing.Image)(resources.GetObject("exReload.Image")));
+            this.exReload.Location = new System.Drawing.Point(1306, 552);
+            this.exReload.Name = "exReload";
+            this.exReload.Size = new System.Drawing.Size(100, 50);
+            this.exReload.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.exReload.TabIndex = 6;
+            this.exReload.TabStop = false;
+            this.exReload.Visible = false;
             // 
             // SegurosWFM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1448, 790);
+            this.ClientSize = new System.Drawing.Size(1648, 790);
             this.Controls.Add(this.panelBodySeguros);
             this.Controls.Add(this.segurosPanelHeader);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -1085,6 +1213,8 @@
             this.Text = "SegurosWFM";
             this.segurosPanelHeader.ResumeLayout(false);
             this.segurosPanelHeader.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.panelBodySeguros.ResumeLayout(false);
             this.grbConsolidadoClienteAseguradora.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridConsolidadoCliente)).EndInit();
@@ -1093,6 +1223,8 @@
             this.groupBoxDetalleSeguros.ResumeLayout(false);
             this.groupBoxDetalleSeguros.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridDetalleSeguro)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reloadSeguro)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.exReload)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1126,6 +1258,13 @@
         private System.Windows.Forms.Label lblTotalCliente;
         private Controls.RJTextBox txtNitAseguradora;
         private Bunifu.UI.WinForms.BunifuLabel lblNit;
-        private FontAwesome.Sharp.IconButton iconButton1;
+        private FontAwesome.Sharp.IconButton btnGenerarSeguro;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private FontAwesome.Sharp.IconButton btnExportarSeguro;
+        private System.Windows.Forms.PictureBox reloadSeguro;
+        private System.Windows.Forms.PictureBox exReload;
     }
 }

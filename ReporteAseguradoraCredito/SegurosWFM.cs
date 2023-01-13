@@ -24,15 +24,16 @@ namespace ReporteAseguradoraCredito
             InitializeComponent();
         }
         
-        private void getVentasAseguradoras()
+        private async Task getVentasAseguradoras()
         {
             dt = new DataTable();
 
             //datagrid detalle seguros
             var fechaI = fechaIniSeguro.Value.Date.ToString("yyyyMMdd");
             var fechaF = fechaFinSeguros.Value.Date.ToString("yyyyMMdd");
+            var nitAseguradora = txtNitAseguradora.Texts.Trim();
             Seguros seguros = new Seguros();
-            DataSet data = seguros.getSeguros("USP_CAC_GET_VENTAS_ASEGURADORAS",fechaI,fechaF);
+            DataSet data = await seguros.getSeguros("USP_CAC_GET_VENTAS_ASEGURADORAS",fechaI,fechaF,nitAseguradora);
             dt = data.Tables[0];
             var tablaSeguros = data.Tables[0];
             dataGridDetalleSeguro.DataSource = data.Tables[0];
@@ -113,33 +114,39 @@ namespace ReporteAseguradoraCredito
         }
         
 
-        private void btnPrueba_Click(object sender, EventArgs e)
-        {
-            getVentasAseguradoras();
-        }
-
         private void txtSerieSeguro_TextChanged(object sender, EventArgs e)
         {
-            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+            if(dataGridDetalleSeguro.Rows.Count > 0)
+            {
+                error.Clear();
+                dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
                                                                                 AND [Numero Fel Asegu] LIKE '%{2}%'
                                                                                 AND [Nombre Cliente] LIKE '%{3}%'
                                                                                 AND [Convenio] LIKE '%{4}%'
                                                                                 AND [Serie Origen Asegu] LIKE '%{5}%'
                                                                                 AND [Numero Origen Asegu] LIKE '%{6}%'
                                                                                 AND [Total Aseguradora] LIKE '%{7}%'", txtSerieSeguro.Text.ToUpper().Trim()
-                                                                                ,txtReferenciaSeguro.Text.Trim()
-                                                                                ,txtNoFelSeguros.Text.Trim()
-                                                                                ,txtClienteSeguros.Text.ToUpper().Trim()
-                                                                                ,txtConvenioSeguro.Text.Trim()
-                                                                                ,txtSerieOrgSeguro.Text.ToUpper().Trim()
-                                                                                ,txtNoOrgSeguro.Text.Trim()
-                                                                                ,txtMontoSeguro.Text.Trim());
-            dataGridDetalleSeguro.DataSource = dt;
+                                                                                , txtReferenciaSeguro.Text.Trim()
+                                                                                , txtNoFelSeguros.Text.Trim()
+                                                                                , txtClienteSeguros.Text.ToUpper().Trim()
+                                                                                , txtConvenioSeguro.Text.Trim()
+                                                                                , txtSerieOrgSeguro.Text.ToUpper().Trim()
+                                                                                , txtNoOrgSeguro.Text.Trim()
+                                                                                , txtMontoSeguro.Text.Trim());
+                dataGridDetalleSeguro.DataSource = dt;
+            }
+            else
+            {
+                error.SetError(txtSerieSeguro, "No hay Datos para filtrar");
+            }
+            
         }
 
         private void txtReferenciaSeguro_TextChanged(object sender, EventArgs e)
         {
-            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+            if(dataGridDetalleSeguro.Rows.Count > 0)
+            {
+                dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
                                                                                 AND [Numero Fel Asegu] LIKE '%{2}%'
                                                                                 AND [Nombre Cliente] LIKE '%{3}%'
                                                                                 AND [Convenio] LIKE '%{4}%'
@@ -153,12 +160,20 @@ namespace ReporteAseguradoraCredito
                                                                                 , txtSerieOrgSeguro.Text.ToUpper().Trim()
                                                                                 , txtNoOrgSeguro.Text.Trim()
                                                                                 , txtMontoSeguro.Text.Trim());
-            dataGridDetalleSeguro.DataSource = dt;
+                dataGridDetalleSeguro.DataSource = dt;
+            }
+            else
+            {
+                error.SetError(txtReferenciaSeguro, "No hay datos para filtrar");
+            }
+            
         }
 
         private void txtClienteSeguros_TextChanged(object sender, EventArgs e)
         {
-            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+            if(dataGridDetalleSeguro.Rows.Count > 0)
+            {
+                dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
                                                                                 AND [Numero Fel Asegu] LIKE '%{2}%'
                                                                                 AND [Nombre Cliente] LIKE '%{3}%'
                                                                                 AND [Convenio] LIKE '%{4}%'
@@ -172,12 +187,20 @@ namespace ReporteAseguradoraCredito
                                                                                 , txtSerieOrgSeguro.Text.ToUpper().Trim()
                                                                                 , txtNoOrgSeguro.Text.Trim()
                                                                                 , txtMontoSeguro.Text.Trim());
-            dataGridDetalleSeguro.DataSource = dt;
+                dataGridDetalleSeguro.DataSource = dt;
+            }
+            else
+            {
+                error.SetError(txtClienteSeguros, "No hay datos para filtrar");
+            }
+            
         }
 
         private void txtNoFelSeguros_TextChanged(object sender, EventArgs e)
         {
-            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+            if(dataGridDetalleSeguro.Rows.Count > 0)
+            {
+                dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
                                                                                 AND [Numero Fel Asegu] LIKE '%{2}%'
                                                                                 AND [Nombre Cliente] LIKE '%{3}%'
                                                                                 AND [Convenio] LIKE '%{4}%'
@@ -191,12 +214,20 @@ namespace ReporteAseguradoraCredito
                                                                                 , txtSerieOrgSeguro.Text.ToUpper().Trim()
                                                                                 , txtNoOrgSeguro.Text.Trim()
                                                                                 , txtMontoSeguro.Text.Trim());
-            dataGridDetalleSeguro.DataSource = dt;
+                dataGridDetalleSeguro.DataSource = dt;
+            }
+            else
+            {
+                error.SetError(txtNoFelSeguros, "No hay datos para filtrar");
+            }
+            
         }
 
         private void txtConvenioSeguro_TextChanged(object sender, EventArgs e)
         {
-            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+            if(dataGridDetalleSeguro.Rows.Count > 0)
+            {
+                dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
                                                                                 AND [Numero Fel Asegu] LIKE '%{2}%'
                                                                                 AND [Nombre Cliente] LIKE '%{3}%'
                                                                                 AND [Convenio] LIKE '%{4}%'
@@ -210,12 +241,20 @@ namespace ReporteAseguradoraCredito
                                                                                 , txtSerieOrgSeguro.Text.ToUpper().Trim()
                                                                                 , txtNoOrgSeguro.Text.Trim()
                                                                                 , txtMontoSeguro.Text.Trim());
-            dataGridDetalleSeguro.DataSource = dt;
+                dataGridDetalleSeguro.DataSource = dt;
+            }
+            else
+            {
+                error.SetError(txtConvenioSeguro, "No hay datos para filtar");
+            }
+            
         }
 
         private void txtSerieOrgSeguro_TextChanged(object sender, EventArgs e)
         {
-            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+            if(dataGridDetalleSeguro.Rows.Count > 0)
+            {
+                dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
                                                                                 AND [Numero Fel Asegu] LIKE '%{2}%'
                                                                                 AND [Nombre Cliente] LIKE '%{3}%'
                                                                                 AND [Convenio] LIKE '%{4}%'
@@ -229,12 +268,20 @@ namespace ReporteAseguradoraCredito
                                                                                 , txtSerieOrgSeguro.Text.ToUpper().Trim()
                                                                                 , txtNoOrgSeguro.Text.Trim()
                                                                                 , txtMontoSeguro.Text.Trim());
-            dataGridDetalleSeguro.DataSource = dt;
+                dataGridDetalleSeguro.DataSource = dt;
+            }
+            else
+            {
+                error.SetError(txtSerieOrgSeguro, "No hay datos para filtrar");
+            }
+            
         }
 
         private void txtNoOrgSeguro_TextChanged(object sender, EventArgs e)
         {
-            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+            if(dataGridDetalleSeguro.Rows.Count > 0)
+            {
+                dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
                                                                                 AND [Numero Fel Asegu] LIKE '%{2}%'
                                                                                 AND [Nombre Cliente] LIKE '%{3}%'
                                                                                 AND [Convenio] LIKE '%{4}%'
@@ -248,12 +295,20 @@ namespace ReporteAseguradoraCredito
                                                                                 , txtSerieOrgSeguro.Text.ToUpper().Trim()
                                                                                 , txtNoOrgSeguro.Text.Trim()
                                                                                 , txtMontoSeguro.Text.Trim());
-            dataGridDetalleSeguro.DataSource = dt;
+                dataGridDetalleSeguro.DataSource = dt;
+            }
+            else
+            {
+                error.SetError(txtNoOrgSeguro, "No hay datos para filtrar");
+            }
+            
         }
 
         private void txtMontoSeguro_TextChanged(object sender, EventArgs e)
         {
-            dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
+            if(dataGridDetalleSeguro.Rows.Count > 0)
+            {
+                dt.DefaultView.RowFilter = string.Format(@"[Serie Aseguradora] LIKE '%{0}%' AND [Numero Aseguradora] LIKE '%{1}%' 
                                                                                 AND [Numero Fel Asegu] LIKE '%{2}%'
                                                                                 AND [Nombre Cliente] LIKE '%{3}%'
                                                                                 AND [Convenio] LIKE '%{4}%'
@@ -267,8 +322,100 @@ namespace ReporteAseguradoraCredito
                                                                                 , txtSerieOrgSeguro.Text.ToUpper().Trim()
                                                                                 , txtNoOrgSeguro.Text.Trim()
                                                                                 , txtMontoSeguro.Text.Trim());
-            dataGridDetalleSeguro.DataSource = dt;
+                dataGridDetalleSeguro.DataSource = dt;
+            }
+            else
+            {
+                error.SetError(txtMontoSeguro, "No hay datos para filtar");
+            }
+            
         }
+
+        ErrorProvider error = new ErrorProvider();
+        private async void btnGenerarSeguro_Click(object sender, EventArgs e)
+        {
+            if(txtNitAseguradora.Texts != "")
+            {
+                reloadSeguro.Visible = true;
+                error.Clear();
+                await getVentasAseguradoras();
+                reloadSeguro.Visible = false;
+            }
+            else
+            {
+                error.SetError(txtNitAseguradora, "Ingrese Nit");
+            }
+        }
+
+        private void exportReporteSeguros(DataGridView dataGridView)
+        {
+            Microsoft.Office.Interop.Excel.Application exportExcel = new Microsoft.Office.Interop.Excel.Application();
+
+            exportExcel.Application.Workbooks.Add(true);
+
+            int indexColumn = 0;
+            foreach(DataGridViewColumn column in dataGridView.Columns)
+            {
+                indexColumn++;
+                exportExcel.Cells[1, indexColumn] = column.Name;
+            }
+
+            int indexFila = 0;
+            foreach(DataGridViewRow fila in dataGridView.Rows)
+            {
+                indexFila++;
+                indexColumn = 0;
+
+                foreach(DataGridViewColumn column in dataGridView.Columns)
+                {
+                   
+                    indexColumn++;
+                    exportExcel.Cells[indexFila + 1, indexColumn] = fila.Cells[column.Name].Value;
+                }
+            }
+            exportExcel.Visible = true;
+        }
+
+        private async void btnExportarSeguro_Click(object sender, EventArgs e)
+        {
+            if(dataGridDetalleSeguro.Rows.Count != 0)
+            {
+                exReload.Visible = true;
+                error.Clear();
+                await timeOut();
+                exportReporteSeguros(dataGridDetalleSeguro);
+                exReload.Visible = false;
+            }
+            else
+            {
+                error.SetError(btnExportarSeguro, "Genere un Reporte");
+            }
+        }
+
+        private void txtNitAseguradora_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 44) || (e.KeyChar >= 46 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 106) || (e.KeyChar >= 108 && e.KeyChar <= 255))
+            {
+                error.SetError(txtNitAseguradora, "Ingrese un nit valido");
+                btnGenerarSeguro.Enabled = false;
+            }
+            else
+            {
+                error.Clear();
+                btnGenerarSeguro.Enabled = true;
+            }
+        }
+
+        public async Task timeOut()
+        {
+            int time = dataGridDetalleSeguro.Rows.Count;
+            for(int i = 0; i < time/2; i++)
+            {
+                await Task.Delay(i);
+            }
+        }
+
+
 
 
 
